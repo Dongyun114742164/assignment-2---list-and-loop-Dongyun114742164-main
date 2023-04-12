@@ -1,5 +1,5 @@
-# Name:
-# SBUID: 
+# Name: Dongyun Lee
+# SBUID: 114742164
 
 # Remove the ellipses (...) when writing your solutions.
 
@@ -36,22 +36,70 @@ def listStd(list_in):
 # digitSum(), replaceDoubleDigit(), isCardValid() and lunhAlgorithm()
 
 def reverseList(list_in):
-    ...
+    k = []
+
+    for i in range(len(list_in)):
+        k.append(list_in(len(list_in)-i-1))
+    return k
 
 def doubleOddIndex(list_in):
-    ...
+    list_in[1::2] = [2*x for x in list_in[1::2]]
+
+    for i in range(len(list_in)):
+        if i % 2 == 1:
+            list_in[i] *= 2
+
+    return list_in
 
 def digitSum(value):
-    ...
+    str_value = str(value)
+
+    if len(str_value) == 1:
+        return int(str_value)
+    else:
+        digit_sum = 0
+        for digit in str_value:
+            digit_sum += int(digit)
+
+        if digit_sum >= 10:
+            return digitSum(digit_sum)
+        else:
+            return False
+
 
 def replaceDoubleDigit(list_in):
-    ...
+    for i in range(len(list_in)):
+        if list_in[i] >= 10:
+            list_in[i] = digitSum(list_in[i])
+    return list_in
 
 def isCardValid(list_in):
-    ...
+    for i in range(len(list_in)-2, -1, -2):
+        list_in[i] = list_in[i] * 2
+        # If the result is greater than 9, subtract 9
+        if list_in[i] > 9:
+            list_in[i] = list_in[i] - 9
+
+    # Calculate the sum of all digits
+    total_sum = sum(list_in)
+
+    # If the sum is divisible by 10, the card is valid
+    if total_sum % 10 == 0:
+        return True
+    else:
+        return False
     
 def lunhAlgorithm(card_nb):
-    ...
+    reversed_card_nb = card_nb[::-1]
+    
+    for i in range(1, len(reversed_card_nb), 2):
+        reversed_card_nb[i] *= 2
+    
+    for i in range(len(reversed_card_nb)):
+        if reversed_card_nb[i] > 9:
+            reversed_card_nb[i] = sum(map(int, str(reversed_card_nb[i])))
+    
+    return sum(reversed_card_nb) % 10 == 0
 
 
 # ---------------------------- MAIN FCT ---------------------------------
@@ -67,7 +115,7 @@ def main():
     print("The std of the list is: ", list_std)
 
     #Exercise 2 main
-    card_number = ...
+    card_number = [4,0,0,0,0,0,1,2,3,4,5,6,7,8,9,9]
 
     ''' Step-by-step tests (you can remove these  tests when you
     are done with the final function lunhAlgorithm )
